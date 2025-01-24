@@ -15,7 +15,6 @@ public class Movement : MonoBehaviour
 
     [Header("Gravity")]
     [SerializeField] private float gravityMultiplier = 1.5f;
-    [SerializeField] private float fallAcceleration = 0.2f;
 
     [Header("Move")]
     [SerializeField] private MoveAttributes moveAttributes;
@@ -47,6 +46,19 @@ public class Movement : MonoBehaviour
             return;
         }
 
+        // Haptic Vibration
+        if (Gamepad.current != null)
+        {
+            if (_moveInput != Vector2.zero && _isGrounded)
+            {
+                Gamepad.current.SetMotorSpeeds(0.15f, 0.02f);
+            }
+            else
+            {
+                Gamepad.current.SetMotorSpeeds(0.0f, 0.0f);
+            }
+        }
+
         Falling();
 
         Vector3 movement = new Vector3(_moveInput.x, -_currentFallSpeed, _moveInput.y).normalized;
@@ -70,8 +82,8 @@ public class Movement : MonoBehaviour
         }
         else
         {
-            _currentFallSpeed = gravityMultiplier * fallAcceleration * Time.fixedDeltaTime;
-            _currentFallSpeed = Mathf.Clamp(_currentFallSpeed, 0, 2);
+            _currentFallSpeed = (gravityMultiplier * Time.deltaTime) / 100.0f;
+            _currentFallSpeed = Mathf.Clamp(_currentFallSpeed, 0, 0.02f);
         }
     }
 }
