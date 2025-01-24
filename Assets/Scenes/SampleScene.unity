@@ -226,7 +226,7 @@ MeshFilter:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 323962523}
-  m_Mesh: {fileID: 10207, guid: 0000000000000000e000000000000000, type: 0}
+  m_Mesh: {fileID: 289301614986012343, guid: 5dd596132bca7dd449dff2849c3e093f, type: 3}
 --- !u!1 &410087039
 GameObject:
   m_ObjectHideFlags: 0
@@ -752,8 +752,7 @@ MonoBehaviour:
     m_Bits: 72
   groundCheck: {fileID: 1481323647}
   groundCheckRadius: 1
-  gravityMultiplier: 0.1
-  fallAcceleration: 0.02
+  gravityMultiplier: 0.00001
   moveAttributes: {fileID: 11400000, guid: 2e38234e36a0e174284851aefe21b719, type: 2}
   model: {fileID: 323962524}
 --- !u!114 &1481323650
