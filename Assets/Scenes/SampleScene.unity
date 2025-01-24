@@ -423,6 +423,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 35bc881de90b7614690dc16a6aec51da, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  groundLayer:
+    serializedVersion: 2
+    m_Bits: 72
+  groundCheck: {fileID: 1481323647}
+  groundCheckRadius: 1
+  gravityMultiplier: 1.5
+  fallAcceleration: 0.2
   moveAttributes: {fileID: 11400000, guid: 2e38234e36a0e174284851aefe21b719, type: 2}
   model: {fileID: 323962524}
 --- !u!114 &1481323650
@@ -483,7 +490,7 @@ GameObject:
   - component: {fileID: 1539124323}
   - component: {fileID: 1539124322}
   - component: {fileID: 1539124321}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Plane
   m_TagString: Untagged
   m_Icon: {fileID: 0}

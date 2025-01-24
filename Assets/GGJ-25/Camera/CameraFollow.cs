@@ -11,6 +11,13 @@ public class CameraFollow : MonoBehaviour
 
     private void Update()
     {
-        transform.position = Vector3.Lerp(transform.position, target.position, followSpeed * Time.deltaTime);
+        Vector3 currentPosition = transform.position;
+        Vector3 targetPosition = target.position;
+
+        transform.position = new Vector3(
+            Mathf.Lerp(currentPosition.x, targetPosition.x, followSpeed * Time.deltaTime),
+            targetPosition.y,
+            Mathf.Lerp(currentPosition.z, targetPosition.z, followSpeed * Time.deltaTime)
+        );
     }
 }

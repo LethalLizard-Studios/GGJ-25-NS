@@ -8,11 +8,23 @@ using UnityEngine.InputSystem;
 [RequireComponent(typeof(Rigidbody))]
 public class Movement : MonoBehaviour
 {
+    [Header("Ground")]
+    [SerializeField] private LayerMask groundLayer;
+    [SerializeField] private Transform groundCheck;
+    [SerializeField] private float groundCheckRadius = 0.2f;
+
+    [Header("Gravity")]
+    [SerializeField] private float gravityMultiplier = 1.5f;
+    [SerializeField] private float fallAcceleration = 0.2f;
+
+    [Header("Move")]
     [SerializeField] private MoveAttributes moveAttributes;
     [SerializeField] private Transform model;
 
     private Rigidbody _rigidbody;
 
+    private bool _isGrounded;
+    private float _currentFallSpeed = 0f;
     private Vector2 _moveInput;
 
     private const float ROTATION_SPEED = 360.0f;
@@ -35,7 +47,9 @@ public class Movement : MonoBehaviour
             return;
         }
 
-        Vector3 movement = new Vector3(_moveInput.x, 0.0f, _moveInput.y).normalized;
+        Falling();
+
+        Vector3 movement = new Vector3(_moveInput.x, -_currentFallSpeed, _moveInput.y).normalized;
         transform.position += movement * moveAttributes.baseSpeed * Time.deltaTime;
 
         if (movement != Vector3.zero)
@@ -43,6 +57,21 @@ public class Movement : MonoBehaviour
             Vector3 rotationAxis = Vector3.Cross(Vector3.up, movement);
             float rotationAmount = ROTATION_SPEED * Time.deltaTime;
             model.Rotate(rotationAxis, rotationAmount, Space.World);
+        }
+    }
+
+    private void Falling()
+    {
+        _isGrounded = Physics.CheckSphere(groundCheck.position, groundCheckRadius, groundLayer);
+
+        if (_isGrounded)
+        {
+            _currentFallSpeed = 0f;
+        }
+        else
+        {
+            _currentFallSpeed = gravityMultiplier * fallAcceleration * Time.fixedDeltaTime;
+            _currentFallSpeed = Mathf.Clamp(_currentFallSpeed, 0, 2);
         }
     }
 }
