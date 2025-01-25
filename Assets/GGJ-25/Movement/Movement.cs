@@ -82,7 +82,8 @@ public class Movement : MonoBehaviour
         }
         else
         {
-            _currentFallSpeed = (gravityMultiplier * Time.deltaTime) / 100.0f;
+            Debug.Log("Not Grounded");
+            _currentFallSpeed = gravityMultiplier * Time.deltaTime;
             _currentFallSpeed = Mathf.Clamp(_currentFallSpeed, 0, 0.02f);
         }
     }
