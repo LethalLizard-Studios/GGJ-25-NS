@@ -4,6 +4,7 @@
 
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.UI;
 
 [RequireComponent(typeof(Rigidbody))]
 public class Movement : MonoBehaviour
@@ -19,6 +20,8 @@ public class Movement : MonoBehaviour
     [Header("Move")]
     [SerializeField] private MoveAttributes moveAttributes;
     [SerializeField] private Transform model;
+    [SerializeField] private Image speedFillImage;
+    [SerializeField] private RectTransform speedIconImage;
 
     private Rigidbody _rigidbody;
 
@@ -57,14 +60,17 @@ public class Movement : MonoBehaviour
         _currentSpeed += moveAttributes.speedUpRate * Time.deltaTime;
         _currentSpeed = Mathf.Clamp(_currentSpeed, 0.0f, moveAttributes.maxSpeed);
 
+        float currentSpeedMultiplier = _currentSpeed / (float)moveAttributes.maxSpeed;
+
+        speedFillImage.fillAmount = currentSpeedMultiplier;
+        speedIconImage.anchoredPosition = new Vector2(0.0f, currentSpeedMultiplier * 380);
+
         // Haptic Vibration
         if (Gamepad.current != null)
         {
-            float vibrationMultiplier = _currentSpeed / (float)moveAttributes.maxSpeed;
-
             if (_isGrounded)
             {
-                Gamepad.current.SetMotorSpeeds(0.05f * vibrationMultiplier, 0.02f * vibrationMultiplier);
+                Gamepad.current.SetMotorSpeeds(0.05f * currentSpeedMultiplier, 0.02f * currentSpeedMultiplier);
             }
             else
             {
@@ -100,7 +106,6 @@ public class Movement : MonoBehaviour
         }
         else
         {
-            Debug.Log("Not Grounded");
             _currentFallSpeed = gravityMultiplier * Time.deltaTime;
             _currentFallSpeed = Mathf.Clamp(_currentFallSpeed, 0, 0.02f);
         }
