@@ -30,7 +30,7 @@ public class Movement : MonoBehaviour
     private float _currentSpeed = 0f;
 
     private const float ROTATION_SPEED = 78.0f;
-    private const float SLOW_DOWN_RATE = 8.0f;
+    private const float SLOW_DOWN_RATE = 6.0f;
 
     private void Awake()
     {
