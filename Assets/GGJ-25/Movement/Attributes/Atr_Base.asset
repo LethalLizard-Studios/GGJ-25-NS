@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Atr_Base
   m_EditorClassIdentifier: 
   maxSpeed: 5
-  speedUpRate: 2
+  speedUpRate: 1
   hasBoost: 0
   jumpHeight: 3
   gravityStrength: 1
