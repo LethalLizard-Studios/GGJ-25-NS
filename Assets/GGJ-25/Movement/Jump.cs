@@ -1,3 +1,7 @@
+/* Programmed by: Leland Carter & Sarah Nguyen
+-- @Date: 1/24/2025
+*/
+
 using UnityEngine;
 using UnityEngine.InputSystem;
 
