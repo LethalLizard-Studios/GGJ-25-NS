@@ -15,6 +15,6 @@ MonoBehaviour:
   maxSpeed: 5
   speedUpRate: 1
   hasBoost: 0
-  jumpHeight: 3
+  jumpHeight: 1
   gravityStrength: 1
   hasDoubleJump: 0

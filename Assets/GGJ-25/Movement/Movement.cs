@@ -27,6 +27,7 @@ public class Movement : MonoBehaviour
 
     private bool _isGrounded;
     private float _currentFallSpeed = 0f;
+    private float _jumpHeight = 0f;
 
     private Vector2 _moveInput;
     private Vector2 _lastDirection = Vector2.zero;
@@ -34,6 +35,7 @@ public class Movement : MonoBehaviour
 
     private const float ROTATION_SPEED = 78.0f;
     private const float SLOW_DOWN_RATE = 6.0f;
+    private const float JUMP_BOOST = 1.1f;
 
     private void Awake()
     {
@@ -44,6 +46,19 @@ public class Movement : MonoBehaviour
     public void OnMove(InputAction.CallbackContext context)
     {
         _moveInput = context.ReadValue<Vector2>();
+    }
+
+    public void SetJumpHeight(float heldTime)
+    {
+        if (!_isGrounded && !moveAttributes.hasDoubleJump)
+        {
+            return;
+        }
+
+        float jumpForce = Mathf.Sqrt(2 * moveAttributes.jumpHeight * heldTime * -Physics.gravity.y);
+        _rigidbody.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
+
+        _currentSpeed *= JUMP_BOOST;
     }
 
     public void Update()
@@ -60,7 +75,7 @@ public class Movement : MonoBehaviour
         _currentSpeed += moveAttributes.speedUpRate * Time.deltaTime;
         _currentSpeed = Mathf.Clamp(_currentSpeed, 0.0f, moveAttributes.maxSpeed);
 
-        float currentSpeedMultiplier = _currentSpeed / (float)moveAttributes.maxSpeed;
+        float currentSpeedMultiplier = _currentSpeed / ((float)moveAttributes.maxSpeed);
 
         speedFillImage.fillAmount = currentSpeedMultiplier;
         speedIconImage.anchoredPosition = new Vector2(0.0f, currentSpeedMultiplier * 380);
@@ -93,6 +108,11 @@ public class Movement : MonoBehaviour
             Vector3 rotationAxis = Vector3.Cross(Vector3.up, movementDirection);
             float rotationAmount = ROTATION_SPEED * _currentSpeed * Time.deltaTime;
             model.Rotate(rotationAxis, rotationAmount, Space.World);
+        }
+
+        if (_jumpHeight > 0.0f)
+        {
+            _jumpHeight -= Time.deltaTime * 3;
         }
     }
 
