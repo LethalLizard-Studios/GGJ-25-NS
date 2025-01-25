@@ -41,11 +41,6 @@ public class Movement : MonoBehaviour
 
     public void Update()
     {
-        if (_moveInput == null)
-        {
-            return;
-        }
-
         // Haptic Vibration
         if (Gamepad.current != null)
         {
@@ -61,12 +56,17 @@ public class Movement : MonoBehaviour
 
         Falling();
 
-        Vector3 movement = new Vector3(_moveInput.x, -_currentFallSpeed, _moveInput.y).normalized;
-        transform.position += movement * moveAttributes.baseSpeed * Time.deltaTime;
+        Vector3 movement = new Vector3(_moveInput.x, 0.0f, _moveInput.y);
+        Vector3 movementDirection = transform.TransformDirection(movement).normalized;
 
-        if (movement != Vector3.zero)
+        movementDirection.y = -_currentFallSpeed;
+        movementDirection = movementDirection.normalized;
+
+        transform.position += movementDirection * moveAttributes.baseSpeed * Time.deltaTime;
+
+        if (movementDirection != Vector3.zero)
         {
-            Vector3 rotationAxis = Vector3.Cross(Vector3.up, movement);
+            Vector3 rotationAxis = Vector3.Cross(Vector3.up, movementDirection);
             float rotationAmount = ROTATION_SPEED * Time.deltaTime;
             model.Rotate(rotationAxis, rotationAmount, Space.World);
         }
