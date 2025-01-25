@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: aebe80aa2859b2a428e5dd68f855e5ea, type: 3}
   m_Name: Atr_Base
   m_EditorClassIdentifier: 
-  baseSpeed: 5
-  maxSpeed: 10
+  maxSpeed: 5
+  speedUpRate: 2
   hasBoost: 0
   jumpHeight: 3
   gravityStrength: 1

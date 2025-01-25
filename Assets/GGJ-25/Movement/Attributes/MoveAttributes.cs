@@ -8,8 +8,8 @@ using UnityEngine;
 public class MoveAttributes : ScriptableObject
 {
     [Header("Move")]
-    public int baseSpeed = 5;
     public int maxSpeed = 10;
+    public float speedUpRate = 0.2f;
     public bool hasBoost = false;
 
     [Header("Jump")]

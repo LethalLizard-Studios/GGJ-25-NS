@@ -24,9 +24,13 @@ public class Movement : MonoBehaviour
 
     private bool _isGrounded;
     private float _currentFallSpeed = 0f;
-    private Vector2 _moveInput;
 
-    private const float ROTATION_SPEED = 360.0f;
+    private Vector2 _moveInput;
+    private Vector2 _lastDirection = Vector2.zero;
+    private float _currentSpeed = 0f;
+
+    private const float ROTATION_SPEED = 78.0f;
+    private const float SLOW_DOWN_RATE = 8.0f;
 
     private void Awake()
     {
@@ -41,12 +45,26 @@ public class Movement : MonoBehaviour
 
     public void Update()
     {
+        if (_moveInput.sqrMagnitude < 0.01f)
+        {
+            _currentSpeed -= SLOW_DOWN_RATE * Time.deltaTime;
+        }
+        else
+        {
+            _lastDirection = _moveInput;
+        }
+
+        _currentSpeed += moveAttributes.speedUpRate * Time.deltaTime;
+        _currentSpeed = Mathf.Clamp(_currentSpeed, 0.0f, moveAttributes.maxSpeed);
+
         // Haptic Vibration
         if (Gamepad.current != null)
         {
-            if (_moveInput != Vector2.zero && _isGrounded)
+            float vibrationMultiplier = _currentSpeed / (float)moveAttributes.maxSpeed;
+
+            if (_isGrounded)
             {
-                Gamepad.current.SetMotorSpeeds(0.15f, 0.02f);
+                Gamepad.current.SetMotorSpeeds(0.05f * vibrationMultiplier, 0.02f * vibrationMultiplier);
             }
             else
             {
@@ -56,18 +74,18 @@ public class Movement : MonoBehaviour
 
         Falling();
 
-        Vector3 movement = new Vector3(_moveInput.x, 0.0f, _moveInput.y);
+        Vector3 movement = new Vector3(_lastDirection.x, 0.0f, _lastDirection.y);
         Vector3 movementDirection = transform.TransformDirection(movement).normalized;
 
         movementDirection.y = -_currentFallSpeed;
         movementDirection = movementDirection.normalized;
 
-        transform.position += movementDirection * moveAttributes.baseSpeed * Time.deltaTime;
+        transform.position += movementDirection * _currentSpeed * Time.deltaTime;
 
         if (movementDirection != Vector3.zero)
         {
             Vector3 rotationAxis = Vector3.Cross(Vector3.up, movementDirection);
-            float rotationAmount = ROTATION_SPEED * Time.deltaTime;
+            float rotationAmount = ROTATION_SPEED * _currentSpeed * Time.deltaTime;
             model.Rotate(rotationAxis, rotationAmount, Space.World);
         }
     }
