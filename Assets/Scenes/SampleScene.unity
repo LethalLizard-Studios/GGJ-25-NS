@@ -3797,7 +3797,7 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1837217829}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 7.6066995}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 0}
@@ -3832,8 +3832,8 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4294967295
-  m_fontColor: {r: 1, g: 1, b: 1, a: 1}
+    rgba: 16777215
+  m_fontColor: {r: 1, g: 1, b: 1, a: 0}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -4277,7 +4277,7 @@ Transform:
   m_GameObject: {fileID: 1481323646}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 30.85, y: 0, z: 11.78}
+  m_LocalPosition: {x: 31.78, y: -2.89, z: 11.33}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -4324,9 +4324,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 35bc881de90b7614690dc16a6aec51da, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  poppedUI: {fileID: 1837217825}
   groundLayer:
     serializedVersion: 2
     m_Bits: 72
+  breakLayer:
+    serializedVersion: 2
+    m_Bits: 64
   groundCheck: {fileID: 1481323647}
   groundCheckRadius: 1
   gravityMultiplier: 0.00001
@@ -4404,8 +4408,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
+  m_AnchoredPosition: {x: -1000, y: 0}
+  m_SizeDelta: {x: -2000, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1547158951
 MonoBehaviour:
@@ -5179,7 +5183,7 @@ Animation:
   m_GameObject: {fileID: 1837217825}
   m_Enabled: 1
   serializedVersion: 4
-  m_Animation: {fileID: 0}
+  m_Animation: {fileID: 7400000, guid: 3e24486dbf96eff4a956248462ba4221, type: 2}
   m_Animations:
   - {fileID: 7400000, guid: 3e24486dbf96eff4a956248462ba4221, type: 2}
   m_WrapMode: 0
@@ -6112,14 +6116,14 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2052814384}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.12210394, y: -0.3503699, z: 0.04612706, w: 0.92747176}
-  m_LocalPosition: {x: 30.85, y: 0, z: 11.78}
+  m_LocalRotation: {x: 0.13052616, y: 0, z: 0, w: 0.9914449}
+  m_LocalPosition: {x: 31.78, y: -2.89, z: 11.33}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1896462685}
   m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 15, y: -41.39, z: 0}
+  m_LocalEulerAnglesHint: {x: 15, y: 0, z: 0}
 --- !u!114 &2052814386
 MonoBehaviour:
   m_ObjectHideFlags: 0

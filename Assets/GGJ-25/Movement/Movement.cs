@@ -9,8 +9,11 @@ using UnityEngine.UI;
 [RequireComponent(typeof(Rigidbody))]
 public class Movement : MonoBehaviour
 {
+    [SerializeField] private GameObject poppedUI;
+
     [Header("Ground")]
     [SerializeField] private LayerMask groundLayer;
+    [SerializeField] private LayerMask breakLayer;
     [SerializeField] private Transform groundCheck;
     [SerializeField] private float groundCheckRadius = 0.2f;
 
@@ -26,6 +29,7 @@ public class Movement : MonoBehaviour
     private Rigidbody _rigidbody;
 
     private bool _isGrounded;
+    private bool _canMove = true;
     private float _currentFallSpeed = 0f;
     private float _jumpHeight = 0f;
 
@@ -61,8 +65,24 @@ public class Movement : MonoBehaviour
         _currentSpeed *= JUMP_BOOST;
     }
 
+    private void Died()
+    {
+        _canMove = false;
+        poppedUI.SetActive(true);
+    }
+
     public void Update()
     {
+        if (!_canMove)
+        {
+            return;
+        }
+
+        if (Physics.CheckSphere(groundCheck.position, 1.0f, breakLayer))
+        {
+            Died();
+        }
+
         if (_moveInput.sqrMagnitude < 0.01f)
         {
             _currentSpeed -= SLOW_DOWN_RATE * Time.deltaTime;
