@@ -6,6 +6,7 @@ using UnityEngine;
 
 public class CameraCollision : MonoBehaviour
 {
+    [SerializeField] private LayerMask layers;
     [SerializeField] private Transform playerBody;
 
     private Vector3 _originalPosition;
@@ -21,7 +22,7 @@ public class CameraCollision : MonoBehaviour
 
     private void Update()
     {
-        bool isInWall = Physics.CheckSphere(transform.position, CHECK_RADIUS);
+        bool isInWall = Physics.CheckSphere(transform.position, CHECK_RADIUS, layers);
 
         if (isInWall)
         {
