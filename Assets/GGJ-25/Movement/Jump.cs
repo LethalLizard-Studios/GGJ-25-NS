@@ -20,7 +20,7 @@ public class Jump : MonoBehaviour
         {
             _heldTime = 0.0f;
             _isHoldingJump = true;
-        }
+        } 
         else if (context.phase.Equals(InputActionPhase.Canceled))
         {
             JumpUp();

@@ -8,14 +8,28 @@ using UnityEngine.InputSystem;
 
 public class RoundStats : MonoBehaviour
 {
-    public bool hasWon = false;
-
     [SerializeField] private UserManager userManager;
+    [SerializeField] private Timer timer;
 
     [SerializeField] private TextMeshProUGUI titleText;
     [SerializeField] private TextMeshProUGUI timeText;
 
-    [SerializeField] private Timer timer;
+    private bool _hasWon = false;
+
+    public void Won()
+    {
+        float time = timer.StopTimer();
+
+        int minutes = Mathf.FloorToInt(time / 60f);
+        int seconds = Mathf.FloorToInt(time % 60);
+        int milliseconds = Mathf.FloorToInt((time % 1) * 100);
+
+        userManager.UpdateUserInfo(time);
+        int rank = userManager.GetPosition(time);
+
+        titleText.text = "You Escaped!";
+        timeText.text = $"{minutes}:{seconds:00}.{milliseconds:00} (#{rank})";
+    }
 
     public void OnEnable()
     {
@@ -25,19 +39,8 @@ public class RoundStats : MonoBehaviour
         int seconds = Mathf.FloorToInt(time % 60);
         int milliseconds = Mathf.FloorToInt((time % 1) * 100);
 
-        if (hasWon)
-        {
-            userManager.UpdateUserInfo(time);
-            int rank = userManager.GetPosition(time);
-
-            titleText.text = "You Escaped!";
-            timeText.text = $"{minutes}:{seconds:00}.{milliseconds:00} (#{rank})";
-        }
-        else
-        {
-            titleText.text = "You Popped!";
-            timeText.text = $"{minutes}:{seconds:00}.{milliseconds:00}";
-        }
+        titleText.text = "You Popped :(";
+        timeText.text = $"{minutes}:{seconds:00}.{milliseconds:00}";
 
         Gamepad.current.SetMotorSpeeds(0.0f, 0.0f);
     }

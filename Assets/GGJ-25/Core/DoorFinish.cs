@@ -10,8 +10,8 @@ public class DoorFinish : MonoBehaviour
     {
         if (other.tag == PLAYER_TAG)
         {
-            roundStats.hasWon = true;
             roundStats.gameObject.SetActive(true);
+            roundStats.Won();
         }
     }
 }
