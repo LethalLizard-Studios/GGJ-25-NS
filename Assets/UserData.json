@@ -4,7 +4,13 @@
             "username": "leland",
             "bestTime": 5.391304969787598,
             "bestTimeFishUsed": 0,
-            "timesPlayed": 6
+            "timesPlayed": 7
+        },
+        {
+            "username": "test",
+            "bestTime": 34.76325607299805,
+            "bestTimeFishUsed": 0,
+            "timesPlayed": 1
         }
     ]
 }
