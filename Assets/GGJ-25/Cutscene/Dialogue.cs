@@ -9,6 +9,7 @@ using UnityEngine.InputSystem;
 public class Dialogue : MonoBehaviour
 {
     [SerializeField] private Renderer fishMesh;
+    [SerializeField] private AudioSource meowSound;
 
     [SerializeField] private UserManager userManager;
     [SerializeField] private Menu menu;
@@ -42,6 +43,8 @@ public class Dialogue : MonoBehaviour
     {
         string line = "";
         string username = userManager.GetUsername();
+
+        meowSound.Play();
 
         switch (_currentLine)
         {
