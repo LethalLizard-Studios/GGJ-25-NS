@@ -26,11 +26,11 @@ public class RoundStats : MonoBehaviour
 
         if (hasWon)
         {
-            int rank = userManager.GetPosition();
+            userManager.UpdateUserInfo(time);
+            int rank = userManager.GetPosition(time);
+
             titleText.text = "You Escaped!";
             timeText.text = $"{minutes}:{seconds:00}.{milliseconds:00} (#{rank})";
-
-            userManager.UpdateUserInfo(time);
         }
         else
         {

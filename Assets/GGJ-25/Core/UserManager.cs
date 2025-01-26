@@ -30,20 +30,25 @@ public class UserManager : MonoBehaviour
         DisplayUserData();
     }
 
-    public int GetPosition()
+    public int GetPosition(float time)
     {
-        if (_loggedInUser == null)
+        _userDataList.users.Sort((a, b) =>
         {
-            return 99;
+            if (a.bestTime == 0 && b.bestTime == 0) return 0;
+            if (a.bestTime == 0) return 1;
+            if (b.bestTime == 0) return -1;
+            return a.bestTime.CompareTo(b.bestTime);
+        });
+
+        for (int i = 0; i < _userDataList.users.Count; i++)
+        {
+            if (_userDataList.users[i].bestTime == 0 || time < _userDataList.users[i].bestTime)
+            {
+                return i + 1;
+            }
         }
 
-        DisplayUserData();
-
-        int index = 99;
-
-        _userDataList.users.IndexOf(_loggedInUser);
-
-        return index + 1;
+        return _userDataList.users.Count + 1;
     }
 
     public void AddUser(string username)
@@ -107,6 +112,7 @@ public class UserManager : MonoBehaviour
         }
 
         SaveUserData();
+        DisplayUserData();
     }
 
     private void LoadUserData()
