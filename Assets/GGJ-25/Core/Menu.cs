@@ -13,6 +13,8 @@ public class Menu : MonoBehaviour
     [SerializeField] private TMP_InputField nameInputField;
     [SerializeField] private GameObject menuCanvas;
     [SerializeField] private GameObject characterCanvas;
+    [SerializeField] private GameObject startButton;
+    [SerializeField] private GameObject userExistsLabel;
 
     [SerializeField] private GameObject player;
     [SerializeField] private GameObject playerCamera;
@@ -24,7 +26,14 @@ public class Menu : MonoBehaviour
 
     public void EnterMenu()
     {
+        startButton.SetActive(false);
         userManager.DisplayUserData();
+    }
+
+    public void OnEditInput()
+    {
+        startButton.SetActive(nameInputField.text.Length > 0);
+        userExistsLabel.SetActive(userManager.UserExists(nameInputField.text.ToLower()));
     }
 
     public void StartClicked()
@@ -32,7 +41,7 @@ public class Menu : MonoBehaviour
         menuCanvas.SetActive(false);
         characterCanvas.SetActive(true);
 
-        userManager.AddUser(nameInputField.text);
+        userManager.AddUser(nameInputField.text.ToLower());
     }
 
     public void CharacterSelected(int index)

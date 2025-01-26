@@ -25,7 +25,7 @@ public class UserManager : MonoBehaviour
 
     private void Awake()
     {
-        _filePath = Path.Combine(Application.persistentDataPath, "UserData.json");
+        _filePath = Path.Combine(Application.dataPath, "UserData.json");
         LoadUserData();
         DisplayUserData();
     }
@@ -37,6 +37,7 @@ public class UserManager : MonoBehaviour
         {
             if (user.username == username)
             {
+                _loggedInUser = user;
                 return;
             }
         }
@@ -52,12 +53,24 @@ public class UserManager : MonoBehaviour
         _loggedInUser = newUser;
         _userDataList.users.Add(newUser);
 
-        SavePlayerData();
+        SaveUserData();
     }
 
     public void SelectFish(int index)
     {
         _fishIndex = index;
+    }
+
+    public bool UserExists(string username)
+    {
+        foreach (var user in _userDataList.users)
+        {
+            if (user.username == username)
+            {
+                return true;
+            }
+        }
+        return false;
     }
 
     public void UpdateUserInfo(float newTime)
@@ -71,11 +84,13 @@ public class UserManager : MonoBehaviour
 
         _userDataList.users[index].timesPlayed++;
 
-        if (newTime < _userDataList.users[index].bestTime)
+        if (newTime < _userDataList.users[index].bestTime || _userDataList.users[index].bestTime == 0.0f)
         {
             _userDataList.users[index].bestTime = newTime;
             _userDataList.users[index].bestTimeFishUsed = _fishIndex;
         }
+
+        SaveUserData();
     }
 
     private void LoadUserData()
@@ -87,7 +102,7 @@ public class UserManager : MonoBehaviour
         }
     }
 
-    private void SavePlayerData()
+    private void SaveUserData()
     {
         string json = JsonUtility.ToJson(_userDataList, true);
         File.WriteAllText(_filePath, json);
