@@ -30,6 +30,16 @@ public class UserManager : MonoBehaviour
         DisplayUserData();
     }
 
+    public string GetUsername()
+    {
+        if (_loggedInUser == null)
+        {
+            return "fishy";
+        }
+
+        return _loggedInUser.username;
+    }
+
     public int GetPosition(float time)
     {
         _userDataList.users.Sort((a, b) =>

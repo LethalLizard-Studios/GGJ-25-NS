@@ -16,6 +16,7 @@ public class Menu : MonoBehaviour
     [SerializeField] private GameObject startButton;
     [SerializeField] private GameObject userExistsLabel;
     [SerializeField] private GameObject runEndCanvas;
+    [SerializeField] private GameObject introCutscene;
 
     [Header("Player")]
     [SerializeField] private Transform playerSpawn;
@@ -31,6 +32,7 @@ public class Menu : MonoBehaviour
     {
         nameInputField.text = "";
         runEndCanvas.SetActive(false);
+        introCutscene.SetActive(false);
         player.SetActive(false);
         playerCamera.SetActive(false);
         startButton.SetActive(false);
@@ -62,13 +64,12 @@ public class Menu : MonoBehaviour
     {
         menuCanvas.SetActive(false);
         characterCanvas.SetActive(false);
-
-        SpawnPlayer();
+        introCutscene.SetActive(true);
     }
 
     public void SpawnPlayer()
     {
-        if (menuCanvas.activeSelf || characterCanvas.activeSelf)
+        if (menuCanvas.activeSelf || characterCanvas.activeSelf || introCutscene.activeSelf)
         {
             return;
         }
@@ -80,6 +81,7 @@ public class Menu : MonoBehaviour
 
         runEndCanvas.SetActive(false);
         player.SetActive(false);
+        introCutscene.SetActive(false);
         player.SetActive(true);
         playerCamera.SetActive(true);
 
