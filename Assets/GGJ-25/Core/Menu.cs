@@ -21,6 +21,7 @@ public class Menu : MonoBehaviour
     [SerializeField] private GameObject cat;
 
     [Header("Character")]
+    [SerializeField] private AudioSource selectSound;
     [SerializeField] private GameObject cameraForCharacters;
     [SerializeField] private Renderer[] bubbleMeshes;
     [SerializeField] private Material selectedBubble;
@@ -112,6 +113,8 @@ public class Menu : MonoBehaviour
 
     private void CharacterSelected()
     {
+        selectSound.Play();
+
         for (int i = 0; i < bubbleMeshes.Length; i++)
         {
             bubbleMeshes[i].material = normalBubble;
