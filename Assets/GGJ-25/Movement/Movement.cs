@@ -83,6 +83,11 @@ public class Movement : MonoBehaviour
         _currentSpeed *= JUMP_BOOST;
     }
 
+    private void OnApplicationQuit()
+    {
+        Gamepad.current.SetMotorSpeeds(0.0f, 0.0f);
+    }
+
     public void FanHit()
     {
         _canMove = false;

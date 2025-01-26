@@ -4,6 +4,7 @@
 
 using TMPro;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class RoundStats : MonoBehaviour
 {
@@ -37,5 +38,7 @@ public class RoundStats : MonoBehaviour
             titleText.text = "You Popped!";
             timeText.text = $"{minutes}:{seconds:00}.{milliseconds:00}";
         }
+
+        Gamepad.current.SetMotorSpeeds(0.0f, 0.0f);
     }
 }
