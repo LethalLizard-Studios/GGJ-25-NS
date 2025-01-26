@@ -69,7 +69,7 @@ public class Menu : MonoBehaviour
 
     public void SpawnPlayer()
     {
-        if (menuCanvas.activeSelf || characterCanvas.activeSelf || introCutscene.activeSelf)
+        if (menuCanvas.activeSelf || characterCanvas.activeSelf)
         {
             return;
         }
