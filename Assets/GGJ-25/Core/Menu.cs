@@ -4,6 +4,7 @@
 
 using TMPro;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class Menu : MonoBehaviour
 {
@@ -18,10 +19,17 @@ public class Menu : MonoBehaviour
     [SerializeField] private GameObject runEndCanvas;
     [SerializeField] private GameObject introCutscene;
 
+    [Header("Character")]
+    [SerializeField] private Renderer[] bubbleMeshes;
+    [SerializeField] private Material selectedBubble;
+    [SerializeField] private Material normalBubble;
+
     [Header("Player")]
     [SerializeField] private Transform playerSpawn;
     [SerializeField] private GameObject player;
     [SerializeField] private GameObject playerCamera;
+
+    private int _currentIndex = 0;
 
     private void Awake()
     {
@@ -55,9 +63,33 @@ public class Menu : MonoBehaviour
         userManager.AddUser(nameInputField.text.ToLower());
     }
 
-    public void CharacterSelected(int index)
+    public void NextSelection(InputAction.CallbackContext context)
     {
-        userManager.SelectFish(index);
+        if (context.phase.Equals(InputActionPhase.Started) && characterCanvas.activeSelf)
+        {
+            _currentIndex = (_currentIndex + 1) % bubbleMeshes.Length;
+            CharacterSelected();
+        }
+    }
+
+    public void PrevSelection(InputAction.CallbackContext context)
+    {
+        if (context.phase.Equals(InputActionPhase.Started) && characterCanvas.activeSelf)
+        {
+            _currentIndex = (_currentIndex - 1) < 0 ? bubbleMeshes.Length - 1 : _currentIndex - 1;
+            CharacterSelected();
+        }
+    }
+
+    private void CharacterSelected()
+    {
+        for (int i = 0; i < bubbleMeshes.Length; i++)
+        {
+            bubbleMeshes[i].material = normalBubble;
+        }
+        bubbleMeshes[_currentIndex].material = selectedBubble;
+
+        userManager.SelectFish(_currentIndex);
     }
 
     public void ConfirmedCharacter()

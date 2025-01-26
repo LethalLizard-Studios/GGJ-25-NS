@@ -4,6 +4,8 @@ using UnityEngine.InputSystem;
 
 public class Dialogue : MonoBehaviour
 {
+    [SerializeField] private Renderer fishMesh;
+
     [SerializeField] private UserManager userManager;
     [SerializeField] private Menu menu;
 
@@ -17,6 +19,8 @@ public class Dialogue : MonoBehaviour
     {
         animations.clip = animations.GetClip("Anim_Intro");
         animations.Play();
+
+        fishMesh.material = userManager.GetFishMaterial();
 
         _currentLine = 0;
         NextDialogueLine();

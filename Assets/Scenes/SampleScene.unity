@@ -2089,6 +2089,38 @@ MonoBehaviour:
         m_CallState: 2
     m_ActionId: eb9832ad-b936-4d61-a467-005b66ac5da6
     m_ActionName: 'Player/Next Dialogue[/Keyboard/space,/XInputControllerWindows/buttonWest]'
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1127089064}
+        m_TargetAssemblyTypeName: Menu, GGJ.Core
+        m_MethodName: NextSelection
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: 79dc4916-6194-4fbd-badb-ef9fd959551a
+    m_ActionName: 'Player/Select Right[/Keyboard/rightArrow,/XInputControllerWindows/rightTrigger,/XInputControllerWindows1/rightTrigger]'
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1127089064}
+        m_TargetAssemblyTypeName: Menu, GGJ.Core
+        m_MethodName: PrevSelection
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: bcc27301-8dbc-445b-9785-2ebf6af01cdf
+    m_ActionName: 'Player/Select Left[/Keyboard/leftArrow,/XInputControllerWindows/leftTrigger,/XInputControllerWindows1/leftTrigger]'
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: Player
@@ -3639,6 +3671,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d9beddc0af90e004d925add81ab8d7b7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  fishMesh: {fileID: 1489336430}
   userManager: {fileID: 1127089062}
   menu: {fileID: 1127089064}
   animations: {fileID: 597620818}
@@ -7539,6 +7572,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   leaderboardContent: {fileID: 1373298516}
   leaderboardEntryPrefab: {fileID: 4453086512285731568, guid: 5fc65a5929cd52747ba01c23beeea9bc, type: 3}
+  fishMesh: {fileID: 1470967572}
+  fishMaterials:
+  - {fileID: 2100000, guid: d632b98a1ffaa62448622d5b29cc639a, type: 2}
+  - {fileID: 2100000, guid: 3248e3b2993815044a7ad5bdc53fabab, type: 2}
+  - {fileID: 2100000, guid: 365edf85a2e97644db4f9c65aa2425b2, type: 2}
+  - {fileID: 2100000, guid: 71041e5d90f51094daf57b2616660f70, type: 2}
+  - {fileID: 2100000, guid: b9726a9b0691926449598f4208ca1f64, type: 2}
 --- !u!4 &1127089063
 Transform:
   m_ObjectHideFlags: 0
@@ -7575,6 +7615,14 @@ MonoBehaviour:
   userExistsLabel: {fileID: 1171730382}
   runEndCanvas: {fileID: 1837217825}
   introCutscene: {fileID: 597620816}
+  bubbleMeshes:
+  - {fileID: 1458482362}
+  - {fileID: 748826470}
+  - {fileID: 1247327536}
+  - {fileID: 811340181}
+  - {fileID: 947142162}
+  selectedBubble: {fileID: 2100000, guid: c10396ef8c377e744a036d14278e45ca, type: 2}
+  normalBubble: {fileID: 2100000, guid: 02d1669382957134e81267f2fc6f0ebc, type: 2}
   playerSpawn: {fileID: 1245822926}
   player: {fileID: 1481323646}
   playerCamera: {fileID: 2052814384}

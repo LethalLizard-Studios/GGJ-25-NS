@@ -11,6 +11,9 @@ public class UserManager : MonoBehaviour
     [SerializeField] private Transform leaderboardContent;
     [SerializeField] private GameObject leaderboardEntryPrefab;
 
+    [SerializeField] private Renderer fishMesh;
+    [SerializeField] private Material[] fishMaterials;
+
     [System.Serializable]
     public class UserDataList
     {
@@ -28,6 +31,11 @@ public class UserManager : MonoBehaviour
         _filePath = Path.Combine(Application.dataPath, "UserData.json");
         LoadUserData();
         DisplayUserData();
+    }
+
+    public Material GetFishMaterial()
+    {
+        return fishMaterials[_fishIndex];
     }
 
     public string GetUsername()
@@ -90,6 +98,7 @@ public class UserManager : MonoBehaviour
     public void SelectFish(int index)
     {
         _fishIndex = index;
+        fishMesh.material = fishMaterials[_fishIndex];
     }
 
     public bool UserExists(string username)
