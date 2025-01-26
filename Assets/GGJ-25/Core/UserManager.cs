@@ -20,11 +20,62 @@ public class UserManager : MonoBehaviour
     private UserDataList _userDataList = new UserDataList();
     private string _filePath;
     private List<GameObject> _entries = new List<GameObject>();
+    private UserData _loggedInUser;
+    private int _fishIndex = 0;
 
     private void Awake()
     {
         _filePath = Path.Combine(Application.persistentDataPath, "UserData.json");
         LoadUserData();
+        DisplayUserData();
+    }
+
+    public void AddUser(string username)
+    {
+        // Check if user already exists in dataList.
+        foreach (var user in _userDataList.users)
+        {
+            if (user.username == username)
+            {
+                return;
+            }
+        }
+
+        UserData newUser = new UserData
+        {
+            username = username,
+            bestTime = 0f,
+            bestTimeFishUsed = 0,
+            timesPlayed = 0
+        };
+
+        _loggedInUser = newUser;
+        _userDataList.users.Add(newUser);
+
+        SavePlayerData();
+    }
+
+    public void SelectFish(int index)
+    {
+        _fishIndex = index;
+    }
+
+    public void UpdateUserInfo(float newTime)
+    {
+        if (!_userDataList.users.Contains(_loggedInUser))
+        {
+            return;
+        }
+
+        int index = _userDataList.users.IndexOf(_loggedInUser);
+
+        _userDataList.users[index].timesPlayed++;
+
+        if (newTime < _userDataList.users[index].bestTime)
+        {
+            _userDataList.users[index].bestTime = newTime;
+            _userDataList.users[index].bestTimeFishUsed = _fishIndex;
+        }
     }
 
     private void LoadUserData()
@@ -44,6 +95,14 @@ public class UserManager : MonoBehaviour
 
     public void DisplayUserData()
     {
+        _userDataList.users.Sort((a, b) =>
+        {
+            if (a.bestTime == 0 && b.bestTime == 0) return 0;
+            if (a.bestTime == 0) return 1;
+            if (b.bestTime == 0) return -1;
+            return a.bestTime.CompareTo(b.bestTime);
+        });
+
         for (int i = 0; i < _entries.Count; i++)
         {
             Destroy(_entries[i]);
@@ -52,7 +111,11 @@ public class UserManager : MonoBehaviour
 
         for (int i = 0; i < _userDataList.users.Count; i++)
         {
-            _entries.Add(Instantiate(leaderboardEntryPrefab, leaderboardContent));
+            UserData data = _userDataList.users[i];
+            GameObject userObject = Instantiate(leaderboardEntryPrefab, leaderboardContent);
+            userObject.GetComponent<EntryView>().Initialize(data.username, data.bestTime, 
+                i + 1, data.bestTimeFishUsed);
+            _entries.Add(userObject);
         }
     }
 }

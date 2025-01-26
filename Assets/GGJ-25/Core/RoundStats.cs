@@ -7,6 +7,7 @@ using UnityEngine;
 
 public class RoundStats : MonoBehaviour
 {
+    [SerializeField] private UserManager userManager;
     [SerializeField] private bool hasWon = false;
 
     [SerializeField] private TextMeshProUGUI titleText;
@@ -27,6 +28,8 @@ public class RoundStats : MonoBehaviour
             int rank = 1;
             titleText.text = "You Escaped!";
             timeText.text = $"{minutes}:{seconds:00}.{milliseconds:00} (#{rank})";
+
+            userManager.UpdateUserInfo(time);
         }
         else
         {
