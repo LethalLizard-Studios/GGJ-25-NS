@@ -21,6 +21,7 @@ public class Menu : MonoBehaviour
     [SerializeField] private GameObject cat;
 
     [Header("Character")]
+    [SerializeField] private GameObject cameraForCharacters;
     [SerializeField] private Renderer[] bubbleMeshes;
     [SerializeField] private Material selectedBubble;
     [SerializeField] private Material normalBubble;
@@ -43,6 +44,7 @@ public class Menu : MonoBehaviour
         runEndCanvas.SetActive(false);
         introCutscene.SetActive(false);
         player.SetActive(false);
+        cameraForCharacters.SetActive(false);
         playerCamera.SetActive(false);
         cat.SetActive(false);
         startButton.SetActive(false);
@@ -61,6 +63,7 @@ public class Menu : MonoBehaviour
     {
         menuCanvas.SetActive(false);
         characterCanvas.SetActive(true);
+        cameraForCharacters.SetActive(true);
 
         userManager.AddUser(nameInputField.text.ToLower());
     }
@@ -122,6 +125,7 @@ public class Menu : MonoBehaviour
     {
         menuCanvas.SetActive(false);
         characterCanvas.SetActive(false);
+        cameraForCharacters.SetActive(false);
         cat.SetActive(false);
         introCutscene.SetActive(true);
     }
