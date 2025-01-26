@@ -1,3 +1,7 @@
+/* Programmed by: Leland Carter & Sarah Nguyen
+-- @Date: 1/26/2025
+*/
+
 using TMPro;
 using UnityEngine;
 using UnityEngine.InputSystem;

@@ -95,7 +95,7 @@ public class Movement : MonoBehaviour
         Gamepad.current.SetMotorSpeeds(0.0f, 0.0f);
     }
 
-    private void Died()
+    public void Died()
     {
         _canMove = false;
         Gamepad.current.SetMotorSpeeds(0.0f, 0.0f);

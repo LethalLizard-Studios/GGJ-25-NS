@@ -7,31 +7,25 @@ using UnityEngine;
 public class Billboard : MonoBehaviour
 {
     [SerializeField] private bool onlyYAxis = false;
-
-    private Camera _mainCamera;
-
-    private void Start()
-    {
-        _mainCamera = Camera.main;
-    }
+    [SerializeField] private Transform target;
 
     private void LateUpdate()
     {
-        if (_mainCamera == null)
+        if (target == null)
         {
             return;
         }
 
         if (onlyYAxis)
         {
-            Vector3 targetPosition = transform.position + _mainCamera.transform.rotation * Vector3.forward;
+            Vector3 targetPosition = transform.position + target.rotation * Vector3.forward;
             targetPosition.y = transform.position.y;
             transform.LookAt(targetPosition);
         }
         else
         {
-            transform.LookAt(transform.position + _mainCamera.transform.rotation * Vector3.forward,
-                             _mainCamera.transform.rotation * Vector3.up);
+            transform.LookAt(transform.position + target.rotation * Vector3.forward,
+                             target.rotation * Vector3.up);
         }
     }
 }
