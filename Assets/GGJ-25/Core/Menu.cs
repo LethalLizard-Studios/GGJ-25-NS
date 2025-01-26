@@ -65,6 +65,30 @@ public class Menu : MonoBehaviour
         userManager.AddUser(nameInputField.text.ToLower());
     }
 
+    public void SelectCharacterButton(InputAction.CallbackContext context)
+    {
+        if (context.phase.Equals(InputActionPhase.Started) && characterCanvas.activeSelf)
+        {
+            ConfirmedCharacter();
+        }
+    }
+
+    public void TryAgainButton(InputAction.CallbackContext context)
+    {
+        if (context.phase.Equals(InputActionPhase.Started) && runEndCanvas.activeSelf)
+        {
+            SpawnPlayer();
+        }
+    }
+
+    public void BackToMenuButton(InputAction.CallbackContext context)
+    {
+        if (context.phase.Equals(InputActionPhase.Started) && runEndCanvas.activeSelf)
+        {
+            EnterMenu();
+        }
+    }
+
     public void NextSelection(InputAction.CallbackContext context)
     {
         if (context.phase.Equals(InputActionPhase.Started) && characterCanvas.activeSelf)
