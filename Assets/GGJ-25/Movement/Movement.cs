@@ -10,6 +10,9 @@ using UnityEngine.UI;
 public class Movement : MonoBehaviour
 {
     [SerializeField] private GameObject poppedUI;
+    [SerializeField] private GameObject popEffect;
+    [SerializeField] private Animation popAnimation;
+    [SerializeField] private MeshRenderer bubbleRenderer;
 
     [Header("Ground")]
     [SerializeField] private LayerMask groundLayer;
@@ -47,6 +50,21 @@ public class Movement : MonoBehaviour
         _rigidbody.freezeRotation = true;
     }
 
+    private void OnEnable()
+    {
+        _rigidbody.useGravity = true;
+        popEffect.SetActive(false);
+        popAnimation.clip = popAnimation.GetClip("Anim_Unpop");
+        popAnimation.Play();
+        bubbleRenderer.enabled = true;
+        _lastDirection = Vector2.zero;
+        _moveInput = Vector2.zero;
+        _currentSpeed = 0f;
+        _currentFallSpeed = 0f;
+
+        _canMove = true;
+    }
+
     public void OnMove(InputAction.CallbackContext context)
     {
         _moveInput = context.ReadValue<Vector2>();
@@ -65,10 +83,25 @@ public class Movement : MonoBehaviour
         _currentSpeed *= JUMP_BOOST;
     }
 
+    public void FanHit()
+    {
+        _canMove = false;
+        _rigidbody.useGravity = false;
+        Gamepad.current.SetMotorSpeeds(0.0f, 0.0f);
+    }
+
     private void Died()
     {
         _canMove = false;
-        poppedUI.SetActive(true); 
+        Gamepad.current.SetMotorSpeeds(0.0f, 0.0f);
+
+        if (!poppedUI.activeSelf)
+        {
+            popAnimation.clip = popAnimation.GetClip("Anim_Pop-Effect");
+            popAnimation.Play();
+            poppedUI.SetActive(true);
+            bubbleRenderer.enabled = false;
+        }
     }
 
     public void Update()

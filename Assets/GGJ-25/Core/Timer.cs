@@ -15,7 +15,7 @@ public class Timer : MonoBehaviour
     private void Start()
     {
         _timer = 0.0f;
-        _isRunning = true;
+        StartTimer();
     }
 
     private void Update()
@@ -30,6 +30,11 @@ public class Timer : MonoBehaviour
 
             timerText.text = $"{minutes}:{seconds:00}.{milliseconds:00}";
         }
+    }
+
+    public void StartTimer()
+    {
+        _isRunning = true;
     }
 
     public float StopTimer()

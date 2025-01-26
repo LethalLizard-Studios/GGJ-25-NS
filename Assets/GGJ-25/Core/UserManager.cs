@@ -30,6 +30,22 @@ public class UserManager : MonoBehaviour
         DisplayUserData();
     }
 
+    public int GetPosition()
+    {
+        if (_loggedInUser == null)
+        {
+            return 99;
+        }
+
+        DisplayUserData();
+
+        int index = 99;
+
+        _userDataList.users.IndexOf(_loggedInUser);
+
+        return index + 1;
+    }
+
     public void AddUser(string username)
     {
         // Check if user already exists in dataList.

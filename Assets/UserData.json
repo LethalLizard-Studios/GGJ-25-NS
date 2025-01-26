@@ -2,13 +2,25 @@
     "users": [
         {
             "username": "leland",
-            "bestTime": 5.391304969787598,
+            "bestTime": 4.336982250213623,
             "bestTimeFishUsed": 0,
-            "timesPlayed": 8
+            "timesPlayed": 17
         },
         {
             "username": "test",
             "bestTime": 34.76325607299805,
+            "bestTimeFishUsed": 0,
+            "timesPlayed": 1
+        },
+        {
+            "username": "ig",
+            "bestTime": 0.0,
+            "bestTimeFishUsed": 0,
+            "timesPlayed": 0
+        },
+        {
+            "username": "wgegwer",
+            "bestTime": 44.08021926879883,
             "bestTimeFishUsed": 0,
             "timesPlayed": 1
         }

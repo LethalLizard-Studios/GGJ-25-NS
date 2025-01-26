@@ -1,3 +1,17 @@
 {
-	"name": "GGJ.Utils"
+    "name": "GGJ.Utils",
+    "rootNamespace": "",
+    "references": [
+        "Demigiant.DOTween",
+        "Unity.TextMeshPro"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
 }
