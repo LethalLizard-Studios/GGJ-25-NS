@@ -32,9 +32,10 @@ public class Timer : MonoBehaviour
         }
     }
 
-    public void StopTimer()
+    public float StopTimer()
     {
         _isRunning = false;
+        return _timer;
     }
 
     public void ResetTimer()

@@ -68,7 +68,7 @@ public class Movement : MonoBehaviour
     private void Died()
     {
         _canMove = false;
-        poppedUI.SetActive(true);
+        poppedUI.SetActive(true); 
     }
 
     public void Update()
