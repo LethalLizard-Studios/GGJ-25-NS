@@ -18,6 +18,7 @@ public class CatMovement : MonoBehaviour
 
     private void OnEnable()
     {
+        _currentPointIndex = 0;
         _canKill = false;
         transform.position = points[0].position;
         _canKill = true;

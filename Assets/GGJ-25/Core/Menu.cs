@@ -148,6 +148,7 @@ public class Menu : MonoBehaviour
         cat.SetActive(false);
         runEndCanvas.SetActive(false);
         player.SetActive(false);
+        playerCamera.SetActive(false);
         introCutscene.SetActive(false);
         player.SetActive(true);
         playerCamera.SetActive(true);

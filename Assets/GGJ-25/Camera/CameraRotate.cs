@@ -17,16 +17,28 @@ public class CameraRotate : MonoBehaviour
     private float _yaw;
     private float _pitch;
 
+    private Vector3 _startingRotation;
+
     public void OnLook(InputAction.CallbackContext context)
     {
         _lookInput = context.ReadValue<Vector2>();
     }
 
-    private void Start()
+    private void Awake()
     {
         Vector3 currentRotation = transform.localEulerAngles;
+        _startingRotation = currentRotation;
         _yaw = currentRotation.y;
         _pitch = currentRotation.x;
+    }
+
+    private void OnEnable()
+    {
+        _yaw = _startingRotation.y;
+        _pitch = _startingRotation.x;
+
+        playerBody.localEulerAngles = new Vector3(0.0f, _yaw, 0.0f);
+        transform.localEulerAngles = new Vector3(_pitch, _yaw, 0.0f);
     }
 
     private void Update()

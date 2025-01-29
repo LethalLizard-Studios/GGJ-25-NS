@@ -25,7 +25,7 @@ public class RoundStats : MonoBehaviour
         int milliseconds = Mathf.FloorToInt((time % 1) * 100);
 
         userManager.UpdateUserInfo(time);
-        int rank = userManager.GetPosition(time);
+        int rank = userManager.GetPosition(time) - 1;
 
         titleText.text = "You Escaped!";
         timeText.text = $"{minutes}:{seconds:00}.{milliseconds:00} (#{rank})";
