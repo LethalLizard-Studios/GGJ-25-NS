@@ -14,6 +14,12 @@ public class MoveAttributes : ScriptableObject
 
     [Header("Jump")]
     public int jumpHeight = 3;
-    public int gravityStrength = 1;
+    public float squishSpeed = 1.0f;
     public bool hasDoubleJump = false;
+
+    [Header("Visual Stats")]
+    public int speed = 2;
+    public int boost = 2;
+    public int bounce = 2;
+    public int squish = 2;
 }

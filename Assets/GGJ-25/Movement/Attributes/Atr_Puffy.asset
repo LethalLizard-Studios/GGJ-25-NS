@@ -1,0 +1,24 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aebe80aa2859b2a428e5dd68f855e5ea, type: 3}
+  m_Name: Atr_Puffy
+  m_EditorClassIdentifier: 
+  maxSpeed: 3
+  speedUpRate: 1
+  hasBoost: 0
+  jumpHeight: 2
+  squishSpeed: 1
+  hasDoubleJump: 0
+  speed: 1
+  boost: 2
+  bounce: 3
+  squish: 2

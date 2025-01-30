@@ -14,8 +14,6 @@ public class RoundStats : MonoBehaviour
     [SerializeField] private TextMeshProUGUI titleText;
     [SerializeField] private TextMeshProUGUI timeText;
 
-    private bool _hasWon = false;
-
     public void Won()
     {
         float time = timer.StopTimer();

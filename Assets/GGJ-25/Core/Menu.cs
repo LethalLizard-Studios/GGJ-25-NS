@@ -24,6 +24,12 @@ public class Menu : MonoBehaviour
     [SerializeField] private AudioSource selectSound;
     [SerializeField] private GameObject cameraForCharacters;
     [SerializeField] private Renderer[] bubbleMeshes;
+    [SerializeField] private Movement movement;
+    [SerializeField] private MoveAttributes[] moveAttributes;
+    [SerializeField] private AttributePreview speedPreview;
+    [SerializeField] private AttributePreview boostPreview;
+    [SerializeField] private AttributePreview bouncePreview;
+    [SerializeField] private AttributePreview squishPreview;
     [SerializeField] private Material selectedBubble;
     [SerializeField] private Material normalBubble;
 
@@ -120,6 +126,12 @@ public class Menu : MonoBehaviour
             bubbleMeshes[i].material = normalBubble;
         }
         bubbleMeshes[_currentIndex].material = selectedBubble;
+        movement.moveAttributes = moveAttributes[_currentIndex];
+
+        speedPreview.SetValue(moveAttributes[_currentIndex].speed);
+        boostPreview.SetValue(moveAttributes[_currentIndex].boost);
+        bouncePreview.SetValue(moveAttributes[_currentIndex].bounce);
+        squishPreview.SetValue(moveAttributes[_currentIndex].squish);
 
         userManager.SelectFish(_currentIndex);
     }

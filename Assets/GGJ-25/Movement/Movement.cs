@@ -24,7 +24,7 @@ public class Movement : MonoBehaviour
     [SerializeField] private float gravityMultiplier = 1.5f;
 
     [Header("Move")]
-    [SerializeField] private MoveAttributes moveAttributes;
+    public MoveAttributes moveAttributes;
     [SerializeField] private Transform model;
     [SerializeField] private Image speedFillImage;
     [SerializeField] private RectTransform speedIconImage;

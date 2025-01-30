@@ -40,7 +40,7 @@ public class Jump : MonoBehaviour
     {
         if (_isHoldingJump)
         {
-            _heldTime += Time.deltaTime;
+            _heldTime += Time.deltaTime * movement.moveAttributes.squishSpeed;
             squish.localScale = Vector3.Lerp(squish.localScale, squished, Time.deltaTime);
         }
         else
